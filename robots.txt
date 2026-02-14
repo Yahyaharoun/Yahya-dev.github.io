@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://tondomaine.com/sitemap.xml
+Sitemap: https://timberyardcm.com/sitemap.xml
