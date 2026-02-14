@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Inscription - Timber Yard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <a href="index.html">
+                    <img src="assets/images/logo-WoodStore.png" alt="WoodStore Logo">
+                </a>
+                <h1>Inscription</h1>
+                <p>Créez votre compte Timber Yard</p>
+            </div>
+            <div class="auth-body">
+                <div id="alertContainer"></div>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="nom">Nom Complet</label>
+                        <input type="text" class="form-control" id="nom" name="nom" placeholder="Jean Dupont" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="votre@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Type de Compte</label>
+                        <select class="form-control" id="role" name="role">
+                            <option value="client">Client</option>
+                            <option value="employe">Employé</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required minlength="6">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmer le mot de passe</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="••••••••" required>
+                    </div>
+                    <div class="form-group">
+                        <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" name="terms" required style="margin-top: 4px;">
+                            <span style="font-size: 14px;">J'accepte les <a href="#" style="color: #228B22;">conditions d'utilisation</a> et la <a href="#" style="color: #228B22;">politique de confidentialité</a></span>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">S'inscrire</button>
+                </form>
+            </div>
+            <div class="auth-footer">
+                <p>Déjà un compte? <a href="login.html">Connectez-vous</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

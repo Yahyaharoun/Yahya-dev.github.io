@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Stock de Bois - Timber Yard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/Logo-parc.png" alt="Timber Yard Logo">
+                    <span>Timber Yard</span>
+                </a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#" class="dropdown-toggle active">Gestion <span class="dropdown-arrow">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="stock.html" class="active">📦 Stock</a></li>
+                            <li><a href="licence.html">📜 Licence</a></li>
+                            <li><a href="mouvement.html">📊 Mouvement</a></li>
+                            <li><a href="statistiques.html">📈 Statistiques</a></li>
+                            <li><a href="contact.html">📞 Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="authButtons">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="register.html" class="btn btn-primary">Inscription</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Stock de Bois</h1>
+            <p>Découvrez notre sélection de bois africains de qualité</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <!-- Filters -->
+            <div class="stock-filters">
+                <form id="filterForm">
+                    <div class="filters-grid">
+                        <div class="form-group">
+                            <label for="searchStock">Rechercher</label>
+                            <input type="text" class="form-control" id="searchStock" placeholder="N° bille, essence...">
+                        </div>
+                        <div class="form-group">
+                            <label for="filterEssence">Essence</label>
+                            <select class="form-control essence-select" id="filterEssence">
+                                <option value="">Toutes les essences</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="filterEtat">État</label>
+                            <select class="form-control" id="filterEtat">
+                                <option value="">Tous les états</option>
+                                <option value="disponible">Disponible</option>
+                                <option value="reserve">Réservé</option>
+                                <option value="vendu">Vendu</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <div style="display: flex; gap: 10px;">
+                                <button type="submit" class="btn btn-primary">Filtrer</button>
+                                <button type="reset" class="btn btn-outline-dark">Réinitialiser</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Admin: Add Stock Button -->
+            <div class="admin-only" style="margin-bottom: 30px;">
+                <button class="btn btn-primary" onclick="openModal('addStockModal')">
+                    + Ajouter un Bois au Stock
+                </button>
+                <button class="btn btn-secondary" onclick="openModal('addEssenceModal')">
+                    + Nouvelle Essence
+                </button>
+            </div>
+
+            <!-- Stock Grid -->
+            <div class="stock-grid" id="stockGrid">
+                <!-- Stock items will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Add Stock Modal -->
+    <div class="modal" id="addStockModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter un Bois au Stock</h3>
+                <button class="modal-close" onclick="closeModal('addStockModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="stockForm">
+                    <div class="form-group">
+                        <label for="essence">Essence</label>
+                        <select class="form-control essence-select" id="essence" name="essence" required>
+                            <option value="">Sélectionner une essence</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="numeroBille">Numéro de Bille</label>
+                        <input type="text" class="form-control" id="numeroBille" name="numeroBille" placeholder="Ex: AY-2026-003" required>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label for="longueur">Longueur (m)</label>
+                            <input type="number" class="form-control" id="longueur" name="longueur" step="0.1" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="diametre">Diamètre (cm)</label>
+                            <input type="number" class="form-control" id="diametre" name="diametre" min="0" required>
+                        </div>
+                    </div>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                        <div class="form-group">
+                            <label for="cubage">Cubage (m³)</label>
+                            <input type="number" class="form-control" id="cubage" name="cubage" step="0.01" min="0" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="prix">Prix (FCFA)</label>
+                            <input type="number" class="form-control" id="prix" name="prix" min="0" required>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Ajouter au Stock</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Essence Modal -->
+    <div class="modal" id="addEssenceModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Ajouter une Nouvelle Essence</h3>
+                <button class="modal-close" onclick="closeModal('addEssenceModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="essenceForm" onsubmit="addNewEssence(event)">
+                    <div class="form-group">
+                        <label for="essenceNom">Nom de l'Essence</label>
+                        <input type="text" class="form-control" id="essenceNom" name="nom" placeholder="Ex: Moabi" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="essenceScientifique">Nom Scientifique (optionnel)</label>
+                        <input type="text" class="form-control" id="essenceScientifique" name="scientifique" placeholder="Ex: Baillonella toxisperma">
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Ajouter l'Essence</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/Logo-parc.png" alt="Timber Yard">
+                        <span>Timber Yard</span>
+                    </div>
+                    <p>Votre partenaire de confiance pour les bois africains de qualité.</p>
+                     <p style="font-family: poppins;">Votre Satisfation est Notre Prioritée😉</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="stock.html">Stock</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Essences</h4>
+                    <ul>
+                        <li><a href="stock.html?essence=ayous">Ayous</a></li>
+                        <li><a href="stock.html?essence=sapelli">Sapelli</a></li>
+                        <li><a href="stock.html?essence=iroko">Iroko</a></li>
+                        <li><a href="stock.html?essence=padouk">Padouk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>📍 Mbalmayo, Région du Centre, Cameroun</p>
+                    <p>📞 +237 690722465</p>
+                    <p>✉️TimberYard@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Timber Yard- Parc de Bois Mbalmayo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Votre Panier</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0 FCFA</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Commander</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Floating Cart Button -->
+    <button class="floating-cart" id="floatingCart">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize stock page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayStock();
+            populateEssenceSelect();
+            
+            // Check URL params for essence filter
+            const urlParams = new URLSearchParams(window.location.search);
+            const essenceParam = urlParams.get('essence');
+            if (essenceParam) {
+                document.getElementById('filterEssence').value = essenceParam;
+                applyFilters();
+            }
+        });
+        
+        function addNewEssence(e) {
+            e.preventDefault();
+            const nom = document.getElementById('essenceNom').value;
+            const scientifique = document.getElementById('essenceScientifique').value;
+            
+            Stock.addCustomEssence({ nom, scientifique });
+            
+            showAlert('Essence ajoutée avec succès', 'success');
+            closeModal('addEssenceModal');
+            populateEssenceSelect();
+            document.getElementById('essenceForm').reset();
+        }
+    </script>
+</body>
+</html>

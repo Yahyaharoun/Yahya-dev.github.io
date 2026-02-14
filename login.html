@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Connexion - Timber Yard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-container">
+            <div class="auth-header">
+                <a href="index.html">
+                    <img src="assets/images/Logo-parc.png" alt="Timber Yard Logo">
+                </a>
+                <h1>Connexion</h1>
+                <p>Accédez à votre espace Timber Yard</p>
+            </div>
+            <div class="auth-body">
+                <div id="alertContainer"></div>
+                
+                <!-- Quick Access Icons -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px;">
+                    <div class="quick-login-card" onclick="fillCredentials('client')" style="text-align: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #4CAF50 0%, #228B22 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 10px;">👤</div>
+                        <p style="font-weight: 600; font-size: 14px; color: #333;">Client</p>
+                    </div>
+                    <div class="quick-login-card" onclick="fillCredentials('admin')" style="text-align: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #2196F3 0%, #1565C0 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 10px;">👔</div>
+                        <p style="font-weight: 600; font-size: 14px; color: #333;">Administrateur</p>
+                    </div>
+                    <div class="quick-login-card" onclick="fillCredentials('employe')" style="text-align: center; padding: 15px; border: 2px solid #e0e0e0; border-radius: 10px; cursor: pointer; transition: all 0.3s ease;">
+                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF9800 0%, #F57C00 100%); display: flex; align-items: center; justify-content: center; font-size: 24px; margin: 0 auto 10px;">🧑‍💼</div>
+                        <p style="font-weight: 600; font-size: 14px; color: #333;">Employé</p>
+                    </div>
+                </div>
+                
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="identifier">Nom d'utilisateur ou Email</label>
+                        <input type="text" class="form-control" id="identifier" name="identifier" placeholder="Nom ou email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Mot de passe</label>
+                        <div style="position: relative;">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="••••••••" required>
+                            <button type="button" onclick="togglePassword()" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 18px;" id="togglePwdBtn">👁️</button>
+                        </div>
+                    </div>
+                    <div class="form-group" style="display: flex; justify-content: space-between; align-items: center;">
+                        <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                            <input type="checkbox" name="remember"> Se souvenir de moi
+                        </label>
+                        <a href="#" style="color: #228B22; font-size: 14px;">Mot de passe oublié?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block btn-lg">Se Connecter</button>
+                </form>
+            </div>
+            <div class="auth-footer">
+                <p>Pas encore de compte? <a href="register.html">Inscrivez-vous</a></p>
+            </div>
+        </div>
+    </div>
+<!--Form Login-->
+    <form onsubmit="event.preventDefault(); login(email.value, password.value)">
+    <input type="email" id="email" placeholder="Email" required>
+    <input type="password" id="password" placeholder="Mot de passe" required>
+    <button type="submit">Connexion</button>
+    <form method="POST" action="../backend/auth/login.php">
+
+</form>
+
+    <script src="script.js"></script>
+    <script>
+        // Fill credentials based on role
+        function fillCredentials(role) {
+            const identifierInput = document.getElementById('identifier');
+            const passwordInput = document.getElementById('password');
+            
+            // Highlight selected card
+            document.querySelectorAll('.quick-login-card').forEach(card => {
+                card.style.borderColor = '#e0e0e0';
+            });
+            event.currentTarget.style.borderColor = '#228B22';
+            
+            if (role === 'admin') {
+                identifierInput.value = 'PDG';
+                passwordInput.value = 'Yahya2506';
+            } else if (role === 'employe') {
+                identifierInput.value = 'Caissier_1';
+                passwordInput.value = 'CaisseP123';
+            } else {
+                identifierInput.value = 'client@parcbois.cm';
+                passwordInput.value = 'client123';
+            }
+        }
+        
+        // Toggle password visibility
+        function togglePassword() {
+            const pwdInput = document.getElementById('password');
+            const toggleBtn = document.getElementById('togglePwdBtn');
+            
+            if (pwdInput.type === 'password') {
+                pwdInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                pwdInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+        
+        // Check URL params for role pre-selection
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const role = urlParams.get('role');
+            if (role) {
+                // Simulate click on the appropriate card
+                const cards = document.querySelectorAll('.quick-login-card');
+                if (role === 'admin' && cards[1]) {
+                    cards[1].click();
+                } else if (role === 'employe' && cards[2]) {
+                    cards[2].click();
+                } else if (role === 'client' && cards[0]) {
+                    cards[0].click();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

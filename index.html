@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Accueil- Timber Yard Mbalmayo, Cameroun</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/Logo-parc.png" alt="Timber Yard Logo">
+                    <span>Timber Yard</span>
+                </a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html" class="active">Accueil</a></li>
+                    <li class="nav-dropdown">
+                        <a href="#" class="dropdown-toggle">Gestion <span class="dropdown-arrow">▼</span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="stock.html">📦 Stock</a></li>
+                            <li><a href="licence.html">📜 Licence</a></li>
+                            <li><a href="mouvement.html">📊 Mouvement</a></li>
+                            <li><a href="statistiques.html">📈 Statistiques</a></li>
+                            <li><a href="contact.html">📞 Contact</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+            <div class="auth-buttons" id="authButtons">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="register.html" class="btn btn-primary">Inscription</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" style="background-image: url('assets/images/hero-forest-timber.jpg');">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1>Bienvenue a Timber Yard</h1>
+            <p>Votre partenaire de confiance pour les bois africains de qualité supérieure</p>
+            <div class="hero-buttons">
+                <a href="stock.html" class="btn btn-primary btn-lg">Voir nos Stocks</a>
+                <a href="contact.html" class="btn btn-outline btn-lg">Nous Contacter</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- User Accounts Section -->
+    <section class="user-accounts">
+        <div class="container">
+            <h2 class="section-title">Accès Rapide</h2>
+            <div class="accounts-grid">
+                <div class="account-card" onclick="quickLogin('client')">
+                    <div class="account-icon client-icon">👤</div>
+                    <h3>Client</h3>
+                    <p>Parcourir et commander</p>
+                </div>
+                <div class="account-card" onclick="quickLogin('admin')">
+                    <div class="account-icon admin-icon">🔐</div>
+                    <h3>Administrateur</h3>
+                    <p>Gestion complète</p>
+                </div>
+                <div class="account-card" onclick="quickLogin('employe')">
+                    <div class="account-icon employe-icon">🧑‍💼</div>
+                    <h3>Employé</h3>
+                    <p>Ventes et suivi</p>
+                </div>
+            </div>
+        </div>
+    </section>
+ <!-- Features Section -->
+    <section class="features">
+        <div class="container">
+            <h2 class="section-title">Pourquoi Choisir Timber Yard?</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🌳</div>
+                    <h3>Bois Certifiés</h3>
+                    <p>Tous nos bois proviennent de forêts gérées durablement avec licences officielles.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>Large Stock</h3>
+                    <p>Plus de 10 essences disponibles: Ayous, Sapelli, Iroko, Padouk et bien plus.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🚚</div>
+                    <h3>Livraison</h3>
+                    <p>Service de livraison disponible au Cameroun et à l'international.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Prix Compétitifs</h3>
+                    <p>Des tarifs attractifs pour les professionnels et particuliers.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Woods Section -->
+    <section class="popular-woods">
+        <div class="container">
+            <h2 class="section-title">Nos Essences Populaires</h2>
+            <div class="woods-slider" id="woodsSlider">
+                <div class="wood-card">
+                    <img src="assets/images/wood-ayous.jpg" alt="Bois Ayous">
+                    <div class="wood-info">
+                        <h3>Ayous</h3>
+                        <p class="wood-scientific">Triplochiton scleroxylon</p>
+                        <p class="wood-price">À partir de 150 000 FCFA/m³</p>
+                        <a href="assets/images/stock.html?essence=ayous" class="btn btn-secondary">Voir Stock</a>
+                    </div>
+                </div>
+                <div class="wood-card">
+                    <img src="assets/images/wood-sapelli.jpg" alt="Bois Sapelli">
+                    <div class="wood-info">
+                        <h3>Sapelli</h3>
+                        <p class="wood-scientific">Entandrophragma cylindricum</p>
+                        <p class="wood-price">À partir de 280 000 FCFA/m³</p>
+                        <a href="stock.html?essence=sapelli" class="btn btn-secondary">Voir Stock</a>
+                    </div>
+                </div>
+                <div class="wood-card">
+                    <img src="assets/images/wood-iroko.jpg" alt="Bois Iroko">
+                    <div class="wood-info">
+                        <h3>Iroko</h3>
+                        <p class="wood-scientific">Milicia excelsa</p>
+                        <p class="wood-price">À partir de 320 000 FCFA/m³</p>
+                        <a href="stock.html?essence=iroko" class="btn btn-secondary">Voir Stock</a>
+                    </div>
+                </div>
+                <div class="wood-card">
+                    <img src="assets/images/wood-padouk.jpg" alt="Bois Padouk">
+                    <div class="wood-info">
+                        <h3>Padouk</h3>
+                        <p class="wood-scientific">Pterocarpus soyauxii</p>
+                        <p class="wood-price">À partir de 250 000 FCFA/m³</p>
+                        <a href="stock.html?essence=padouk" class="btn btn-secondary">Voir Stock</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button class="slider-btn prev" id="sliderPrev">❮</button>
+                <button class="slider-btn next" id="sliderNext">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="about" style="background-image: url('assets/images/timber-park-aerial.jpg');">
+        <div class="about-overlay"></div>
+        <div class="container">
+            <div class="about-content">
+                <h2>Notre Parc à Mbalmayo</h2>
+                <p>Situé au cœur de la région du Centre au Cameroun, notre parc de bois de Mbalmayo est un acteur majeur dans la commercialisation des bois africains.</p>
+                <ul class="about-list">
+                    <li>✓ Plus de 5000 m³ de bois en stock permanent</li>
+                    <li>✓ Équipe de 50+ professionnels qualifiés</li>
+                    <li>✓ Certifications forestières à jour</li>
+                    <li>✓ Partenaires B2B et B2C</li>
+                </ul>
+                <a href="contact.html" class="btn btn-primary">En Savoir Plus</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Prêt à Commander ?</h2>
+            <p>Créez votre compte pour accéder à nos stocks et passer vos commandes en ligne.</p>
+            <div class="cta-buttons">
+                <a href="register.html" class="btn btn-primary btn-lg">Créer un Compte</a>
+                <a href="stock.html" class="btn btn-outline btn-lg">Parcourir les Stocks</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/Logo-parc.png" alt="Timber Yard">
+                        <span>Timber Yard</span>
+                    </div>
+                    <p>Votre partenaire de confiance pour les bois africains de qualité.</p>
+                    <p style="font-family: poppins;">Votre Satisfation est Notre Prioritée😉</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="stock.html">Stock</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Essences</h4>
+                    <ul>
+                        <li><a href="stock.html?essence=ayous">Ayous</a></li>
+                        <li><a href="stock.html?essence=sapelli">Sapelli</a></li>
+                        <li><a href="stock.html?essence=iroko">Iroko</a></li>
+                        <li><a href="stock.html?essence=padouk">Padouk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>📍 Mbalmayo, Région du Centre, Cameroun</p>
+                    <p>📞 +237 690722465</p>
+                    <p>✉️ TimberYard@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Timber Yard - Parc de Bois Mbalmayo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Votre Panier</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0 FCFA</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Commander</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Floating Cart Button -->
+    <button class="floating-cart" id="floatingCart">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // Quick login function
+        function quickLogin(role) {
+            if (role === 'admin') {
+                window.location.href = 'login.html?role=admin';
+            } else if (role === 'employe') {
+                window.location.href = 'login.html?role=employe';
+            } else {
+                window.location.href = 'login.html?role=client';
+            }
+        }
+    </script>
+</body>
+</html>

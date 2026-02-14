@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Contact - Timber Yard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/Logo-parc.png" alt="Timber Yard logo">
+                    <span>Timber Yard</span>
+                </a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="stock.html">Stock</a></li>
+                    <li><a href="licence.html">Licence</a></li>
+                    <li><a href="mouvement.html">Mouvement</a></li>
+                    <li><a href="statistiques.html">Statistiques</a></li>
+                    <li><a href="contact.html" class="active">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="register.html" class="btn btn-primary">Inscription</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Contactez-Nous</h1>
+            <p>Nous sommes à votre écoute pour toute question ou demande</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info">
+                    <h3>Nos Coordonnées</h3>
+                    
+                    <div class="contact-item">
+                        <div class="icon">📍</div>
+                        <div>
+                            <h4>Adresse</h4>
+                            <p>Parc de Bois de Mbalmayo<br>Route Nationale N2<br>Mbalmayo, Région du Centre<br>Cameroun</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">📞</div>
+                        <div>
+                            <h4>Téléphone</h4>
+                            <p>+237 690722465</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">✉️</div>
+                        <div>
+                            <h4>Email</h4>
+                            <p>TimberYard@gmail.com<br>Yahyaharoun.657@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <div class="icon">🕐</div>
+                        <div>
+                            <h4>Ouvert 24/24H</h4>
+                        </div>
+                    </div>
+
+                     <!-- Map Placeholder -->
+                    <div style="margin-top: 30px; background: #e0e0e0; height: 200px; border-radius: 12px; display: flex; align-items: center; justify-content: center; overflow: hidden;">
+                        <iframe 
+                            src="assets/images/map-placeholder-mbyo.png"
+                            width="600%" 
+                            height="600" 
+                            style="border:0; border-radius: 12px;" 
+                            allowfullscreen="" 
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade">
+                        </iframe>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form">
+                    <h3>Envoyez-nous un Message</h3>
+                    <div id="alertContainer"></div>
+                    
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="contactNom">Nom Complet *</label>
+                            <input type="text" class="form-control" id="contactNom" name="nom" placeholder="Votre nom" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactEmail">Email *</label>
+                            <input type="email" class="form-control" id="contactEmail" name="email" placeholder="votre@email.com" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactTel">Téléphone</label>
+                            <input type="tel" class="form-control" id="contactTel" name="telephone" placeholder="+237 6XX XXX XXX">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactSujet">Sujet *</label>
+                            <select class="form-control" id="contactSujet" name="sujet" required>
+                                <option value="">Sélectionner un sujet</option>
+                                <option value="devis">Demande de Devis</option>
+                                <option value="info">Demande d'Information</option>
+                                <option value="commande">Suivi de Commande</option>
+                                <option value="partenariat">Partenariat B2B</option>
+                                <option value="reclamation">Réclamation</option>
+                                <option value="autre">Autre</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactEssence">Essence Intéressée (optionnel)</label>
+                            <select class="form-control essence-select" id="contactEssence" name="essence">
+                                <option value="">Sélectionner une essence</option>
+                            </select>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="contactMessage">Message *</label>
+                            <textarea class="form-control" id="contactMessage" name="message" rows="5" placeholder="Décrivez votre demande en détail..." required></textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary btn-block btn-lg">
+                            Envoyer le Message
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section style="background-color: #f5f5dc; padding: 60px 0;">
+        <div class="container">
+            <h2 class="section-title">Questions Fréquentes</h2>
+            
+            <div style="max-width: 800px; margin: 0 auto;">
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-body" style="cursor: pointer;" onclick="toggleFaq(this)">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="color: #228B22;">Comment passer une commande ?</h4>
+                            <span style="font-size: 20px;">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: #666;">
+                            <p>Vous pouvez passer commande de plusieurs façons :</p>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>En ligne via notre page Stock</li>
+                                <li>Par téléphone au +237 690722465</li>
+                                <li>En vous rendant directement au parc à Mbalmayo</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-body" style="cursor: pointer;" onclick="toggleFaq(this)">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="color: #228B22;">Quels modes de paiement acceptez-vous ?</h4>
+                            <span style="font-size: 20px;">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: #666;">
+                            <p>Nous acceptons :</p>
+                            <ul style="margin-left: 20px; margin-top: 10px;">
+                                <li>Paiement en espèces</li>
+                                <li>Carte bancaire <em>Visa</em></li>
+                                <li>Orange Money</li>
+                                <li>MTN Mobile Money</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-body" style="cursor: pointer;" onclick="toggleFaq(this)">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="color: #228B22;">Livrez-vous à l'international ?</h4>
+                            <span style="font-size: 20px;">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: #666;">
+                            <p>Oui, nous exportons nos bois à l'international. Contactez-nous pour obtenir un devis personnalisé incluant les frais de transport et les formalités douanières.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-body" style="cursor: pointer;" onclick="toggleFaq(this)">
+                        <div style="display: flex; justify-content: space-between; align-items: center;">
+                            <h4 style="color: #228B22;">Vos bois sont-ils certifiés ?</h4>
+                            <span style="font-size: 20px;">+</span>
+                        </div>
+                        <div class="faq-answer" style="display: none; margin-top: 15px; color: #666;">
+                            <p>Tous nos bois proviennent de forêts gérées durablement et disposent de licences forestières officielles délivrées par le Ministère des Forêts et de la Faune du Cameroun.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/Logo-parc.png" alt="Timber Yard logo">
+                        <span>Timber Yard</span>
+                    </div>
+                    <p>Votre partenaire de confiance pour les bois africains de qualité.</p>
+                    <p style="font-family: poppins;">Votre Satisfation est Notre Prioritée😉</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="stock.html">Stock</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Essences</h4>
+                    <ul>
+                        <li><a href="stock.html?essence=ayous">Ayous</a></li>
+                        <li><a href="stock.html?essence=sapelli">Sapelli</a></li>
+                        <li><a href="stock.html?essence=iroko">Iroko</a></li>
+                        <li><a href="stock.html?essence=padouk">Padouk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>📍 Mbalmayo, Région du Centre, Cameroun</p>
+                    <p>📞 +237 690722465</p>
+                    <p>✉️ TimberYard@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Timber Yard - Parc de Bois Mbalmayo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cart Sidebar -->
+    <div class="cart-sidebar" id="cartSidebar">
+        <div class="cart-header">
+            <h3>Votre Panier</h3>
+            <button class="close-cart" id="closeCart">×</button>
+        </div>
+        <div class="cart-items" id="cartItems">
+            <p class="empty-cart">Votre panier est vide</p>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Total:</span>
+                <span id="cartTotal">0 FCFA</span>
+            </div>
+            <button class="btn btn-primary btn-block" id="checkoutBtn">Commander</button>
+        </div>
+    </div>
+    <div class="cart-overlay" id="cartOverlay"></div>
+
+    <!-- Floating Cart Button -->
+    <button class="floating-cart" id="floatingCart">
+        🛒 <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+    <script src="script.js"></script>
+    <script>
+        // Initialize contact page
+        document.addEventListener('DOMContentLoaded', function() {
+            populateEssenceSelect();
+        });
+        
+        function toggleFaq(element) {
+            const answer = element.querySelector('.faq-answer');
+            const icon = element.querySelector('span');
+            
+            if (answer.style.display === 'none') {
+                answer.style.display = 'block';
+                icon.textContent = '−';
+            } else {
+                answer.style.display = 'none';
+                icon.textContent = '+';
+            }
+        }
+    </script>
+</body>
+</html>

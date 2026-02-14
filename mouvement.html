@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Mouvements - Timber Yard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/logo-WoodStore.png" alt="Timber Yard Logo">
+                    <span>Timber Yard</span>
+                </a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="stock.html">Stock</a></li>
+                    <li><a href="licence.html">Licence</a></li>
+                    <li><a href="mouvement.html" class="active">Mouvement</a></li>
+                    <li><a href="statistiques.html">Statistiques</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="register.html" class="btn btn-primary">Inscription</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Historique des Mouvements</h1>
+            <p>Suivi des ventes et transactions (Admin/Employés)</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <!-- Access Control Message -->
+            <div id="accessDenied" class="card" style="text-align: center; padding: 60px;">
+                <div style="font-size: 80px; margin-bottom: 20px;">🔒</div>
+                <h2 style="color: #dc3545; margin-bottom: 15px;">Accès Restreint</h2>
+                <p style="color: #666; margin-bottom: 30px;">Cette section est réservée aux administrateurs et employés.<br>Veuillez vous connecter.</p>
+                <a href="login.html" class="btn btn-primary">Se Connecter</a>
+            </div>
+
+            <!-- Employee/Admin Content -->
+            <div id="employeeContent" style="display: none;">
+                <!-- Filters -->
+                <div class="stock-filters" style="margin-bottom: 30px;">
+                    <div class="filters-grid">
+                        <div class="form-group">
+                            <label for="filterDateStart">Date Début</label>
+                            <input type="date" class="form-control" id="filterDateStart">
+                        </div>
+                        <div class="form-group">
+                            <label for="filterDateEnd">Date Fin</label>
+                            <input type="date" class="form-control" id="filterDateEnd">
+                        </div>
+                        <div class="form-group">
+                            <label for="filterCanal">Canal</label>
+                            <select class="form-control" id="filterCanal">
+                                <option value="">Tous les canaux</option>
+                                <option value="online">En ligne</option>
+                                <option value="physique">Physique</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>&nbsp;</label>
+                            <button class="btn btn-primary" onclick="filterVentes()">Filtrer</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Employee: New Sale Button -->
+                <div style="margin-bottom: 30px;">
+                    <button class="btn btn-primary" onclick="openModal('newSaleModal')">
+                        + Enregistrer une Vente Physique
+                    </button>
+                </div>
+
+                <!-- Ventes Table -->
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Historique des Ventes</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Date</th>
+                                        <th>Essence</th>
+                                        <th>Client</th>
+                                        <th>Employé</th>
+                                        <th>Canal</th>
+                                        <th>Montant</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ventesTable">
+                                    <!-- Ventes will be loaded here -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Summary -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 30px;">
+                    <div class="stat-card">
+                        <div class="icon">📊</div>
+                        <h3 id="totalVentes">0</h3>
+                        <p>Total Ventes</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">💰</div>
+                        <h3 id="totalCA">0 FCFA</h3>
+                        <p>Chiffre d'Affaires</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">🌐</div>
+                        <h3 id="ventesOnline">0</h3>
+                        <p>Ventes En Ligne</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">🏪</div>
+                        <h3 id="ventesPhysique">0</h3>
+                        <p>Ventes Physiques</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- New Sale Modal -->
+    <div class="modal" id="newSaleModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Enregistrer une Vente Physique</h3>
+                <button class="modal-close" onclick="closeModal('newSaleModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="saleForm" onsubmit="processSale(event)">
+                    <div class="form-group">
+                        <label for="saleBois">Sélectionner le Bois</label>
+                        <select class="form-control" id="saleBois" name="boisId" required>
+                            <option value="">Choisir un bois disponible</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="saleClient">Nom du Client</label>
+                        <input type="text" class="form-control" id="saleClient" name="clientNom" placeholder="Nom complet" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="saleClientEmail">Email du Client (optionnel)</label>
+                        <input type="email" class="form-control" id="saleClientEmail" name="clientEmail" placeholder="email@exemple.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="salePaiement">Mode de Paiement</label>
+                        <select class="form-control" id="salePaiement" name="paiement" required>
+                            <option value="especes">Espèces</option>
+                            <option value="carte">Carte Bancaire <em>Visa</em></option>
+                            <option value="orange">Orange Money</option>
+                            <option value="mtn">MTN MoMo</option>
+                        </select>
+                    </div>
+                    <div id="saleDetails" style="background: #f5f5dc; padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                        <p>Sélectionnez un bois pour voir les détails</p>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Valider la Vente</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/Logo-parc.png" alt="Timber Yard">
+                        <span>Timber Yard</span>
+                    </div>
+                    <p>Votre partenaire de confiance pour les bois africains de qualité.</p>
+                     <p style="font-family: poppins;">Votre Satisfation est Notre Prioritée😉</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="stock.html">Stock</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Essences</h4>
+                    <ul>
+                        <li><a href="stock.html?essence=ayous">Ayous</a></li>
+                        <li><a href="stock.html?essence=sapelli">Sapelli</a></li>
+                        <li><a href="stock.html?essence=iroko">Iroko</a></li>
+                        <li><a href="stock.html?essence=padouk">Padouk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>📍 Mbalmayo, Région du Centre, Cameroun</p>
+                    <p>📞 +237 690722465</p>
+                    <p>✉️TimberYard@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Timber Yard - Parc de Bois Mbalmayo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Check employee access
+        document.addEventListener('DOMContentLoaded', function() {
+            checkEmployeeAccess();
+            loadVentesPage();
+        });
+        
+        function checkEmployeeAccess() {
+            const user = Auth.getCurrentUser();
+            const accessDenied = document.getElementById('accessDenied');
+            const employeeContent = document.getElementById('employeeContent');
+            
+            if (user && (user.role === 'admin' || user.role === 'employe')) {
+                accessDenied.style.display = 'none';
+                employeeContent.style.display = 'block';
+            } else {
+                accessDenied.style.display = 'block';
+                employeeContent.style.display = 'none';
+            }
+        }
+        
+        function loadVentesPage() {
+            displayVentes();
+            updateVentesStats();
+            populateBoisSelect();
+        }
+        
+        function updateVentesStats() {
+            const stats = Ventes.getStats();
+            document.getElementById('totalVentes').textContent = stats.totalVentes;
+            document.getElementById('totalCA').textContent = formatPrice(stats.totalCA);
+            document.getElementById('ventesOnline').textContent = stats.ventesOnline;
+            document.getElementById('ventesPhysique').textContent = stats.ventesPhysique;
+        }
+        
+        function populateBoisSelect() {
+            const select = document.getElementById('saleBois');
+            if (!select) return;
+            
+            const available = Stock.getAvailable();
+            select.innerHTML = '<option value="">Choisir un bois disponible</option>' +
+                available.map(b => `<option value="${b.id}" data-price="${b.prix}" data-essence="${b.essenceNom}">${b.numeroBille} - ${b.essenceNom} (${formatPrice(b.prix)})</option>`).join('');
+            
+            select.addEventListener('change', function() {
+                const option = this.options[this.selectedIndex];
+                const details = document.getElementById('saleDetails');
+                
+                if (this.value) {
+                    const bois = Stock.items.find(b => b.id === this.value);
+                    details.innerHTML = `
+                        <p><strong>Essence:</strong> ${bois.essenceNom}</p>
+                        <p><strong>N° Bille:</strong> ${bois.numeroBille}</p>
+                        <p><strong>Cubage:</strong> ${bois.cubage} m³</p>
+                        <p><strong>Prix:</strong> <span style="color: #228B22; font-size: 20px; font-weight: bold;">${formatPrice(bois.prix)}</span></p>
+                    `;
+                } else {
+                    details.innerHTML = '<p>Sélectionnez un bois pour voir les détails</p>';
+                }
+            });
+        }
+        
+        function processSale(e) {
+            e.preventDefault();
+            
+            const user = Auth.getCurrentUser();
+            const formData = new FormData(e.target);
+            const boisId = formData.get('boisId');
+            const bois = Stock.items.find(b => b.id === boisId);
+            
+            if (!bois) {
+                showAlert('Veuillez sélectionner un bois', 'warning');
+                return;
+            }
+            
+            Ventes.addVente({
+                boisId: bois.id,
+                essence: bois.essenceNom,
+                quantite: 1,
+                montant: bois.prix,
+                clientNom: formData.get('clientNom'),
+                clientEmail: formData.get('clientEmail'),
+                employeNom: user.nom,
+                canal: 'physique',
+                paiement: formData.get('paiement')
+            });
+            
+            showAlert('Vente enregistrée avec succès!', 'success');
+            closeModal('newSaleModal');
+            e.target.reset();
+            loadVentesPage();
+        }
+        
+        function filterVentes() {
+            const startDate = document.getElementById('filterDateStart').value;
+            const endDate = document.getElementById('filterDateEnd').value;
+            const canal = document.getElementById('filterCanal').value;
+            
+            let filtered = [...Ventes.items];
+            
+            if (startDate) {
+                filtered = filtered.filter(v => new Date(v.date) >= new Date(startDate));
+            }
+            
+            if (endDate) {
+                filtered = filtered.filter(v => new Date(v.date) <= new Date(endDate + 'T23:59:59'));
+            }
+            
+            if (canal) {
+                filtered = filtered.filter(v => v.canal === canal);
+            }
+            
+            displayVentes(filtered);
+        }
+    </script>
+</body>
+</html>

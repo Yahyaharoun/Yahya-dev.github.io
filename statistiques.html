@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="assets/images/Logo-parc.png" type="image/png">
+    <title>Statistiques - Timber Yard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header Navigation -->
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/images/Logo-parc.png" alt="Timber Yard Logo">
+                    <span>Timber Yard</span>
+                </a>
+            </div>
+            <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="nav" id="mainNav">
+                <ul>
+                    <li><a href="index.html">Accueil</a></li>
+                    <li><a href="stock.html">Stock</a></li>
+                    <li><a href="licence.html">Licence</a></li>
+                    <li><a href="mouvement.html">Mouvement</a></li>
+                    <li><a href="statistiques.html" class="active">Statistiques</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="auth-buttons">
+                <a href="login.html" class="btn btn-outline">Connexion</a>
+                <a href="register.html" class="btn btn-primary">Inscription</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Statistiques</h1>
+            <p>Tableau de bord et analyses (Admin/Employés)</p>
+        </div>
+    </section>
+
+    <!-- Page Content -->
+    <section class="page-content">
+        <div class="container">
+            <!-- Access Control Message -->
+            <div id="accessDenied" class="card" style="text-align: center; padding: 60px;">
+                <div style="font-size: 80px; margin-bottom: 20px;">🔒</div>
+                <h2 style="color: #dc3545; margin-bottom: 15px;">Accès Restreint</h2>
+                <p style="color: #666; margin-bottom: 30px;">Cette section est réservée aux administrateurs et employés.<br>Veuillez vous connecter.</p>
+                <a href="login.html" class="btn btn-primary">Se Connecter</a>
+            </div>
+
+            <!-- Stats Content -->
+            <div id="statsContent" style="display: none;">
+                <!-- KPI Cards -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="icon">💰</div>
+                        <h3 id="statCA">0 FCFA</h3>
+                        <p>Chiffre d'Affaires Total</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">📦</div>
+                        <h3 id="statStock">0</h3>
+                        <p>Bois en Stock</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">🛒</div>
+                        <h3 id="statVentes">0</h3>
+                        <p>Ventes Totales</p>
+                    </div>
+                    <div class="stat-card">
+                        <div class="icon">👥</div>
+                        <h3 id="statClients">0</h3>
+                        <p>Clients Inscrits</p>
+                    </div>
+                </div>
+
+                <!-- Charts Row -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-top: 30px;">
+                    <!-- Sales Chart -->
+                    <div class="chart-container">
+                        <h3>Évolution des Ventes</h3>
+                        <div class="chart" id="salesChart"></div>
+                    </div>
+
+                    <!-- Top Woods Chart -->
+                    <div class="chart-container">
+                        <h3>Top Essences Vendues</h3>
+                        <div class="chart" id="topWoodsChart"></div>
+                    </div>
+                </div>
+
+                <!-- Stock by Essence -->
+                <div class="card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h3>Stock par Essence</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="stockByEssence" style="display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px;">
+                            <!-- Stock cards will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="card" style="margin-top: 30px;">
+                    <div class="card-header">
+                        <h3>Activité Récente</h3>
+                    </div>
+                    <div class="card-body">
+                        <div id="recentActivity">
+                            <!-- Activity will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-logo">
+                        <img src="assets/images/Logo-parc.png" alt="Timber Yard">
+                        <span>Timber Yard</span>
+                    </div>
+                    <p>Votre partenaire de confiance pour les bois africains de qualité.</p>
+                     <p style="font-family: poppins;">Votre Satisfation est Notre Prioritée😉</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="stock.html">Stock</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Essences</h4>
+                    <ul>
+                        <li><a href="stock.html?essence=ayous">Ayous</a></li>
+                        <li><a href="stock.html?essence=sapelli">Sapelli</a></li>
+                        <li><a href="stock.html?essence=iroko">Iroko</a></li>
+                        <li><a href="stock.html?essence=padouk">Padouk</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact</h4>
+                    <p>📍 Mbalmayo, Région du Centre, Cameroun</p>
+                    <p>📞 +237 690722465</p>
+                    <p>✉️TimberYard@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Timber Yard- Parc de Bois Mbalmayo. Tous droits réservés.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // Check access and load stats
+        document.addEventListener('DOMContentLoaded', function() {
+            checkStatsAccess();
+            loadStats();
+        });
+        
+        function checkStatsAccess() {
+            const user = Auth.getCurrentUser();
+            const accessDenied = document.getElementById('accessDenied');
+            const statsContent = document.getElementById('statsContent');
+            
+            if (user && (user.role === 'admin' || user.role === 'employe')) {
+                accessDenied.style.display = 'none';
+                statsContent.style.display = 'block';
+            } else {
+                accessDenied.style.display = 'block';
+                statsContent.style.display = 'none';
+            }
+        }
+        
+        function loadStats() {
+            // Load KPIs
+            const ventesStats = Ventes.getStats();
+            document.getElementById('statCA').textContent = formatPrice(ventesStats.totalCA);
+            document.getElementById('statStock').textContent = Stock.items.filter(s => s.etat === 'disponible').length;
+            document.getElementById('statVentes').textContent = ventesStats.totalVentes;
+            document.getElementById('statClients').textContent = Auth.users.filter(u => u.role === 'client').length;
+            
+            // Draw charts
+            initCharts();
+            
+            // Load stock by essence
+            loadStockByEssence();
+            
+            // Load recent activity
+            loadRecentActivity();
+        }
+        
+        function loadStockByEssence() {
+            const container = document.getElementById('stockByEssence');
+            if (!container) return;
+            
+            const essenceCount = {};
+            Stock.items.forEach(item => {
+                if (item.etat === 'disponible') {
+                    essenceCount[item.essenceNom] = (essenceCount[item.essenceNom] || 0) + 1;
+                }
+            });
+            
+            const colors = ['#228B22', '#8B4513', '#DAA520', '#CD5C5C', '#4682B4', '#9370DB', '#20B2AA', '#FF6347'];
+            let colorIndex = 0;
+            
+            container.innerHTML = Object.entries(essenceCount).map(([essence, count]) => {
+                const color = colors[colorIndex % colors.length];
+                colorIndex++;
+                return `
+                    <div style="background: linear-gradient(135deg, ${color}22 0%, ${color}11 100%); padding: 20px; border-radius: 12px; text-align: center; border-left: 4px solid ${color};">
+                        <h4 style="color: ${color}; margin-bottom: 5px;">${count}</h4>
+                        <p style="font-size: 14px; color: #666;">${essence}</p>
+                    </div>
+                `;
+            }).join('');
+            
+            if (Object.keys(essenceCount).length === 0) {
+                container.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: #999;">Aucun stock disponible</p>';
+            }
+        }
+        
+        function loadRecentActivity() {
+            const container = document.getElementById('recentActivity');
+            if (!container) return;
+            
+            const recentVentes = Ventes.items.slice(-5).reverse();
+            
+            if (recentVentes.length === 0) {
+                container.innerHTML = '<p style="text-align: center; color: #999; padding: 20px;">Aucune activité récente</p>';
+                return;
+            }
+            
+            container.innerHTML = recentVentes.map(v => `
+                <div style="display: flex; align-items: center; gap: 15px; padding: 15px; border-bottom: 1px solid #eee;">
+                    <div style="width: 50px; height: 50px; border-radius: 50%; background-color: ${v.canal === 'online' ? '#228B22' : '#DAA520'}; color: white; display: flex; align-items: center; justify-content: center; font-size: 20px;">
+                        ${v.canal === 'online' ? '🌐' : '🏪'}
+                    </div>
+                    <div style="flex: 1;">
+                        <p style="font-weight: 600; margin-bottom: 3px;">Vente ${v.canal === 'online' ? 'en ligne' : 'physique'}</p>
+                        <p style="font-size: 14px; color: #666;">${v.essence || 'N/A'} - ${v.clientNom || 'Client'}</p>
+                    </div>
+                    <div style="text-align: right;">
+                        <p style="font-weight: 600; color: #228B22;">${formatPrice(v.montant)}</p>
+                        <p style="font-size: 12px; color: #999;">${formatDateTime(v.date)}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+    </script>
+</body>
+</html>
